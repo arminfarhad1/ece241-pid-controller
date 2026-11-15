@@ -1,0 +1,30 @@
+# Quartus generated folders
+db/
+incremental_db/
+output_files/
+simulation/
+greybox_tmp/
+hc_output/
+.qsys_edit/
+
+# Quartus generated files
+*.rpt
+*.chg
+*.log
+*.htm
+*.eqn
+*.pin
+*.sof
+*.pof
+*.rbf
+*.jam
+*.jbc
+*.ekp
+*.jdi
+*.sld
+*.summary
+*.smsg
+*.done
+*.qws
+*.bak
+*.orig
