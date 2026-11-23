@@ -1,1 +1,2 @@
-module 
+module pid_controller;
+endmodule

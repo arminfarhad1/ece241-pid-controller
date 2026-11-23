@@ -28,3 +28,6 @@ hc_output/
 *.qws
 *.bak
 *.orig
+sim/work/
+*.wlf
+transcript
