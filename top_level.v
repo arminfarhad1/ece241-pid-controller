@@ -23,7 +23,7 @@ module top_level (
     );
 
     // Angle controller with 180 and 0 Clamping
-    reg [7:0] target_angle;
+    reg [8:0] target_angle;
 
     always @(posedge CLOCK_50 or negedge resetn) begin
         if (!resetn) begin
@@ -31,14 +31,14 @@ module top_level (
         end else if (key_valid) begin
             case (scan_code)
                 8'h1D: // 'W' causes +5 degrees (clamped at 180 max)
-                    target_angle <= (target_angle <= 8'd175) ? (target_angle + 8'd5) : 8'd180; // Clamped at 180 degrees
+                    target_angle <= (target_angle => 9'd355) ? (target_angle - 9'd355) : (target_angle + 9'd5); // wrapps 355 to 0
                 8'h1B: // 'S' causes -5 degrees (clamped at 0 min)
-                    target_angle <= (target_angle >= 8'd5)   ? (target_angle - 8'd5) : 8'd0;   // Clamped at 0 degrees
-                8'h29: target_angle <= 8'd0;  // 'Space' -> 0 deg
-                8'h16: target_angle <= 8'd30; // '1' -> 30 deg
-                8'h1E: target_angle <= 8'd45; // '2' -> 45 deg
-                8'h26: target_angle <= 8'd60; // '3' -> 60 deg
-                8'h25: target_angle <= 8'd90; // '4' -> 90 deg
+                    target_angle <= (target_angle < 9'd5) ? (target_angle + 9'd355) : (target_angle - 9'd5);   // Clamped at 0 degrees
+                8'h29: target_angle <= 9'd0;  // 'Space' -> 0 deg
+                8'h16: target_angle <= 9'd30; // '1' -> 30 deg
+                8'h1E: target_angle <= 9'd45; // '2' -> 45 deg
+                8'h26: target_angle <= 9'd60; // '3' -> 60 deg
+                8'h25: target_angle <= 9'd90; // '4' -> 90 deg
 
                 default: target_angle <= target_angle; // Ignore unmapped
             endcase
